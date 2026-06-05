@@ -1,21 +1,21 @@
-#########
-# ROI_1 #
-#########
+/*
+ROI_1
+*/
 selectImage("3_Rebin.tif");
 run("Duplicate...", "title=158-212 duplicate range=158-212");
 makeRectangle(47, 17, 321, 226);
 run("Duplicate...", "title=ROI_1_Raw duplicate");
 
-###########################
-# Segmentation Using Weka #
-###########################
+/*
+Segmentation Using Weka
+*/
 //setTool("freeline");
 run("Trainable Weka Segmentation");
 selectImage("Trainable Weka Segmentation v4.0.0");
 
-#####################
-# Feature Selection #
-#####################
+
+// Feature Selection #
+
 
 call("trainableSegmentation.Weka_Segmentation.setFeature", "Variance=true");
 call("trainableSegmentation.Weka_Segmentation.setFeature", "Anisotropic_diffusion=true");
@@ -38,10 +38,10 @@ selectImage("Probability maps");
  mapscall("trainableSegmentation.Weka_Segmentation.saveClassifier", "../Model_1.model");
 close;
 
-########################################
-# Thresholding to obtain Segmentations #
-########################################
-# ROI_1 Lipid Thresholding
+
+// Thresholding to obtain Segmentations
+
+// ROI_1 Lipid Thresholding
 
 selectImage("Probability maps.tif");
 run("Duplicate...", "title=Lipid_Maps duplicate channels=3");
@@ -66,7 +66,7 @@ close;
 close;
 
 
-# Tubules Thresholding
+// Tubules Thresholding
 
 run("Duplicate...", "title=Tubules_Maps duplicate channels=5");
 run("Duplicate...", "duplicate");
@@ -146,7 +146,7 @@ run("Convert to Mask", "background=Dark calculate black");
 run("Gaussian Blur...", "sigma=1.5 stack");
 saveAs("Tiff", "/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_1/Tubules_Thresholded_ROI_1.tif");
 
-#ER thresholding 
+// ER thresholding 
 
 run("Select path", "inputfile=/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_1/Probability maps.tif");
 
@@ -180,5 +180,4 @@ run("Gaussian Blur...", "sigma=1.5 stack");
 saveAs("Tiff", "/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_1/Thresholded_ER.tif");
 
 
-
-# Finally Save all thresholded files as Wavefront .OBJ format to be rendered
+// Finally Save all thresholded files as Wavefront .OBJ format to be rendered
