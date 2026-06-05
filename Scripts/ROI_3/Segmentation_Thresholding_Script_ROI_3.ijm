@@ -88,7 +88,7 @@ saveAs("Tiff", "/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3
 run("Wavefront .OBJ ...", "stack=ER_Thresholded.tif threshold=50 resampling=2 red green blue save=[/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/Object/ER_ROI_3.obj]");
 
 
-// Tubules Thresholding 
+// Microvilli Thresholding 
 
 
 run("Select path", "inputfile=[/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/ROI_3_Tubules.tif]");
@@ -114,24 +114,3 @@ run("Wavefront .OBJ ...", "stack=Tubules_Thresholded.tif threshold=50 resampling
 run("Close");
 
 
-// Lipids Thresholding 
-
-
-run("Select path", "inputfile=[/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/ROI_3_Lipid-1.tif]");
-selectImage("ROI_3_Lipid-1.tif");
-run("16-bit");
-//run("Brightness/Contrast...");
-setMinAndMax(28059, 65535);
-run("Apply LUT", "stack");
-run("Duplicate...", "title=Lipid_B&C duplicate");
-
-setAutoThreshold("Default dark no-reset");
-//run("Threshold...");
-run("Convert to Mask", "background=Dark calculate black create");
-
-makeOval(-107, -130, 481, 354);
-run("Clear", "stack");
-run("Gaussian Blur...", "sigma=1 stack");
-saveAs("Tiff", "/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/Thresholded/Lipid_Thresholded.tif");
-run("Wavefront .OBJ ...", "stack=Lipid_Thresholded.tif threshold=50 resampling=2 red green blue save=[/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/Object/Lipids_ROI_3.obj]");
-saveAs("Tiff", "/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/Thresholded/Lipid_Thresholded.tif");
