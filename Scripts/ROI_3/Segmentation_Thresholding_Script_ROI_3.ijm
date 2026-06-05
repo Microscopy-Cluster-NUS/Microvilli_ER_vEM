@@ -1,21 +1,21 @@
-#########
-# ROI_3 # 
-#########
 
-# ROI_3 Selection #
+// ROI_3 
+
+
+// ROI_3 Selection 
 
 makeRectangle(0, 308, 665, 445);
 
 run("Duplicate...", "title=ROI_3_Main.tif duplicate");
 
 
-# ROI_3 Segmentation #
+// ROI_3 Segmentation 
 
 //setTool("freeline");
 run("Trainable Weka Segmentation");
 selectImage("Trainable Weka Segmentation v4.0.0");
 
-# Feature Selection #
+// Feature Selection 
 
 call("trainableSegmentation.Weka_Segmentation.setFeature", "Variance=true");
 call("trainableSegmentation.Weka_Segmentation.setFeature", "Mean=true");
@@ -36,18 +36,16 @@ call("trainableSegmentation.Weka_Segmentation.changeClassName", "0", "Mitochondr
 call("trainableSegmentation.Weka_Segmentation.changeClassName", "1", "ER");
 call("trainableSegmentation.Weka_Segmentation.setClassBalance", "true");
 
-###########################
-# Saving Probability Maps #
-###########################
+// Saving Probability Maps 
+
 
 call("trainableSegmentation.Weka_Segmentation.getProbability");
 selectImage("Probability maps");
  mapscall("trainableSegmentation.Weka_Segmentation.saveClassifier", "../ROI_3.model");
 close;
 
-###################
-# ER Thresholding #
-###################
+// ER Thresholding 
+
 
 run("Select path", "inputfile=[/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/ROI_3_ER.tif]");
 selectImage("ROI_3_ER.tif");
@@ -59,7 +57,8 @@ resetMinAndMax;
 selectImage("ROI_3_ER-1.tif");
 //setTool("freehand");
 
-# Removing Extra region
+// Removing Extra region
+
 //setTool("oval");
 makeOval(-60, -82, 406, 242);
 setBackgroundColor(0, 0, 0);
@@ -88,9 +87,9 @@ saveAs("Tiff", "/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3
 
 run("Wavefront .OBJ ...", "stack=ER_Thresholded.tif threshold=50 resampling=2 red green blue save=[/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/Object/ER_ROI_3.obj]");
 
-########################
-# Tubules Thresholding #
-########################
+
+// Tubules Thresholding 
+
 
 run("Select path", "inputfile=[/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/ROI_3_Tubules.tif]");
 selectImage("ROI_3_Tubules.tif");
@@ -114,9 +113,9 @@ run("Wavefront .OBJ ...", "stack=Tubules_Thresholded.tif threshold=50 resampling
 run("Wavefront .OBJ ...", "stack=Tubules_Thresholded.tif threshold=50 resampling=2 red green blue save=[/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/Object/Tubules_ROI_3.obj]");
 run("Close");
 
-#######################
-# Lipids Thresholding #
-#######################
+
+// Lipids Thresholding 
+
 
 run("Select path", "inputfile=[/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_3/Probability Maps/ROI_3_Lipid-1.tif]");
 selectImage("ROI_3_Lipid-1.tif");
