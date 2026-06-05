@@ -1,5 +1,7 @@
 # Microvilli_ER_vEM
 
+[![DOI](https://zenodo.org/badge/1015897714.svg)](https://doi.org/10.5281/zenodo.20550192)
+
 Volume electron microscopy (vEM) analysis of microvilli and ER across three regions of interest (ROIs).
 
 Alexander Ludwig – Low Kay En
