@@ -21,10 +21,10 @@ selectImage("Probability maps");
 close;
 
 
-// Thresholding to obtain Segmentations 
+// Thresholding to obtain Segmentation masks
 
 
-// Tubules Thresholding
+// Microvilli Thresholding
 
 selectImage("Tubules_ROI2");
 run("In [+]");
