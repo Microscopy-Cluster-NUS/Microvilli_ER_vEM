@@ -39,34 +39,10 @@ selectImage("Probability maps");
 close;
 
 
-// Thresholding to obtain Segmentations
-
-// ROI_1 Lipid Thresholding
-
-selectImage("Probability maps.tif");
-run("Duplicate...", "title=Lipid_Maps duplicate channels=3");
-run("Duplicate...", "duplicate");
-selectImage("Lipid_Maps");
-selectImage("Lipid_Maps-1");
-run("16-bit");
-//run("Brightness/Contrast...");
-setMinAndMax(24600, 40359);
-run("Apply LUT", "stack");
-run("Close");
-setOption("ScaleConversions", true);
-run("8-bit");
-run("Smooth", "stack");
-setAutoThreshold("Default dark no-reset");
-//run("Threshold...");
-setThreshold(113, 255, "raw");
-run("Convert to Mask", "background=Dark calculate black");
-run("Gaussian Blur...", "sigma=1 stack");
-saveAs("Tiff", "/Users/samaksh/Desktop/NUS_Work/EMU/NTU-Kayen/Steps_16Bits/ROI_1/Lipids_Thresholded_ROI_1.tif");
-close;
-close;
+// Thresholding to obtain Segmentation masks
 
 
-// Tubules Thresholding
+// Microvilli Thresholding
 
 run("Duplicate...", "title=Tubules_Maps duplicate channels=5");
 run("Duplicate...", "duplicate");
