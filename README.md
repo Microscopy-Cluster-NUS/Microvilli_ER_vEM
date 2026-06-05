@@ -1,6 +1,6 @@
 # Microvilli_ER_vEM
 
-Volume electron microscopy (vEM) analysis of microvilli, ER, tubules, lipids and mitochondria across three regions of interest (ROIs).
+Volume electron microscopy (vEM) analysis of microvilli and ER across three regions of interest (ROIs).
 
 Alexander Ludwig – Low Kay En
 
