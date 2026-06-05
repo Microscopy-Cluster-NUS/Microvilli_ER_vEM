@@ -1,30 +1,30 @@
-#########
-# ROI_2 #
-#########
+
+// ROI_2 
+
 
 selectImage("3_Rebin.tif");
 run("Duplicate...", "title=1-90 duplicate range=1-90");
 makeRectangle(42, 0, 552, 512);
 run("Duplicate...", "title=ROI_2_Raw duplicate");
 
-###########################
-# Segmentation Using Weka #
-###########################
+
+// Segmentation Using Weka 
+
 //setTool("freeline");
 run("Trainable Weka Segmentation");
 selectImage("Trainable Weka Segmentation v4.0.0");
 
-# Probability map model
+// Probability map model
 call("trainableSegmentation.Weka_Segmentation.getProbability");
 selectImage("Probability maps");
  mapscall("trainableSegmentation.Weka_Segmentation.saveClassifier", "../ROI_2.model");
 close;
 
-########################################
-# Thresholding to obtain Segmentations #
-########################################
 
-# Tubules Thresholding
+// Thresholding to obtain Segmentations 
+
+
+// Tubules Thresholding
 
 selectImage("Tubules_ROI2");
 run("In [+]");
@@ -50,7 +50,7 @@ run("Wavefront .OBJ ...", "stack=Tubules_ROI2 threshold=50 resampling=2 red gree
 selectImage("ROI_2_Probability_maps.tif");
 
 
-# ER Thresholding
+// ER Thresholding
 
 run("Duplicate...", "title=ER duplicate channels=2");
 selectImage("ER");
@@ -70,4 +70,4 @@ run("8-bit");
 setThreshold(771, 65535, "raw");
 run("Convert to Mask", "background=Dark calculate black");
 
-# Finally Save all thresholded files as Wavefront .OBJ format to be rendered
+// Finally Save all thresholded files as Wavefront .OBJ format to be rendered
